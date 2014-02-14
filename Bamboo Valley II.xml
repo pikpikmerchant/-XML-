@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<map proto="1.3.1">
+	<include src="tutorial.xml"/>
+	<name>Bamboo Valley II</name>
+	<version>1.0.0</version>
+	<objective>Destroy the other team's 3 Emerald Monuments!</objective>
+	<authors>
+		<author>thestrangeboy1</author>
+	</authors>
+	<contributors>
+		<contributor contribution="Helped">elego123</contributor>
+		<contributor contribution="XML">pikpikmerchant</contributor>
+	</contributors>
+	<teams>
+		<team color="dark red" max="40">Red Team</team>
+		<team color="blue" max="40">Blue Team</team>
+	</teams>
+	<timelock>on</timelock>
+	<destroyables material="emerald block" completion="100%">
+		<destroyables owner="red">
+			<destroyable name="Valley Monument">
+				<cuboid min="66,12,-40" max="69,21,-37"/>
+			</destroyable>
+			<destroyable name="Island Monument">
+				<cuboid min="87,27,2," max="90,36,-1"/>
+			</destroyable>
+			<destroyable name="Hill Mounument">
+				<cuboid min="93,40,43" max="96,49,40"/>
+			</destroyable>
+		</destroyables>
+		<destroyables owner="blue">
+			<destroyable name="Valley Monument">
+				<cuboid min="-41,12,41" max="-44,21,38"/>
+			</destroyable>
+			<destroyable name="Island Monument">
+				<cuboid min="-62,28,-1" max="-65,36,2"/>
+			</destroyable>
+			<destroyable name="Hill Mounument">
+				<cuboid min="-68,40,-42" max="-71,49,-39"/>
+			</destroyable>
+		</destroyables>
+	</destroyables>
+	<filters>
+		<filter name="only-iron" parents="deny-all">
+			<allow>
+				<block>iron block</block>
+			</allow>
+		</filter>
+		<filter name="only-red">
+			<team>red</team>
+		</filter>
+		<filter name="only-blue">
+			<team>blue</team>
+		</filter>
+	</filters>
+	<regions>
+		<rectangle name="map" min="-oo,-oo" max="oo,oo"/>
+		<rectangle name="main-area" min="181,-49" max="-156,50"/>
+		<union name="bases">
+			<rectangle name="red-base" min="150,50" max="181,-49"/>
+			<rectangle name="blue-base" min="-125,-49" max="-156,50"/>
+		</union>
+		<union name="spawns">
+			<union name="red-spawns">
+				<cuboid name="red-left-spawn" min="151,59,-48" max="157,65,-41"/>
+				<cuboid name="red-right-spawn" min="151,58,49" max="157,65,42"/>
+			</union>
+			<union name="blue-spawns">
+				<cuboid name="blue-left-spawn" min="-126,58,49" max="-132,65,42"/>
+				<cuboid name="blue-right-spawn" min="-126,58,-48" max="-132,655,-41"/>
+			</union>
+		</union>
+		<!-- Applied -->
+		<apply enter="only-red" message="`7You may not enter the other team's spawn!">
+			<region name="red-spawns"/>
+		</apply>
+		<apply enter="only-blue" message="`7You may not enter the other team's spawn!">
+			<region name="blue-spawns"/>
+		</apply>
+		<apply block="only-iron" message="`7You may not interact with team bases!">
+			<region name="bases"/>
+		</apply>
+		<apply block="deny-all" message="`7You may not build outside of the playable area!">
+			<negative>
+				<region name="main-area"/>
+			</negative>
+		</apply>
+	</regions>
+	<maxbuildheight>61</maxbuildheight>
+	<kits>
+		<kit name="spawn">
+			<item slot="0">iron sword</item>
+			<item slot="1">bow</item>
+			<!-- [Experimental] Infinite Arrows; Bows w/o Inifinty Enchantment (Electroid told me this would work if it doesn't yell at him and not me) -->
+			<item slot="28" amount="-1">arrow</item>
+			<item slot="2" enchant="dig speed:1;durability:3">iron pickaxe</item>
+			<item slot="3" enchant="dig speed:1;durability:3">iron axe</item>
+			<item slot="4" amount="64" damage="3">logs</item>
+			<item slot="5" amount="64" damage="3">leaves</item>
+			<item slot="6" amount="32">vine</item>
+			<item slot="7" amount="64">cooked chicken</item>
+			<item slot="8" amount="2">golden apple</item>
+			<item slot="35" amount="1">bucket</item>
+		</kit>
+	</kits>
+	<spawns>
+		<spawns team="red" kit="spawn">
+			<spawn yaw="-90">
+				<cuboid min="153.5,59,44.5" max="154.5,59,46.5"/>
+			</spawn>
+			<spawn yaw="-90">
+				<cuboid min="153.5,59,-45.5" max="154.5,59,-43.5"/>
+			</spawn>
+		</spawns>
+		<spawns team="blue" kit="spawn">
+			<spawn yaw="90">
+				<cuboid min="-128.5,59,-43.5" max="-129.5,59,-45.5"/>
+			</spawn>
+		</spawns>
+		<default yaw="180">
+			<cylinder base="12.5,75,-0.5" radius="1" height="0"/>
+		</default>
+	</spawns>
+	<itemremove>
+		<item damage="3">sapling</item>
+		<item>arrow</item>
+		<item>sugar cane</item>
+		<item>cocoa</item>
+		<item>clay ball</item>
+		<item>seeds</item>
+		<item>cobble wall</item>
+		<item damage="1">cobble wall</item>
+		<item>anvil</item>
+		<item>torch</item>
+		<item>sand</item>
+		<!-- Stone Brick Materials -->
+		<item>98</item>
+		<item damage="1">98</item>
+		<item damage="2">98</item>
+		<!-- Stairs -->
+		<item>109</item>
+		<item>136</item>
+		<!-- Stained Clay -->
+		<item damage="11">159</item>
+		<item damage="14">159</item>
+	</itemremove>
+	<toolrepair>
+		<tool>iron sword</tool>
+		<tool>bow</tool>
+		<tool>iron pickaxe</tool>
+		<tool>iron axe</tool>
+	</toolrepair>
+	<tutorial>
+		<stage title="`a`lDestroy the Monument">
+			<message>
+				<line>`rThis map is a `r`aDestroy the Monument `r`7(DTM) map.</line>
+				<line>`rThe objective is to destroy the enemy's 3 emerald monuments.</line>
+			</message>
+			<teleport>
+				<point yaw="-90" pitch="60">79.5,40,0.5</point>
+			</teleport>
+		</stage>
+		<stage title="Spawns">
+			<message>
+				<line>`rThis is wear players `4spawn.</line>
+				<line>`rPlayers spawn with gear so they ready to are ready to go in to battle!</line>
+			</message>
+			<teleport>
+				<point yaw="75" pitch="30">164,64.5,43</point>
+			</teleport>
+		</stage>
+		<stage title="Boat Dispensers">
+			<message>
+				<line>`rRight outside of spawns, there are `7dispensers `rthat will spawn in `3boats `rso that you can go down the river faster.</line>
+				<line>`r`lThe dispenser will never run out of boats.</line>
+			</message>
+			<teleport>
+				<point yaw="45" pitch="45">-143.5,62,41.5</point>
+			</teleport>
+		</stage>
+		<stage title="Iron Mines">
+			<message>
+				<line>`rNext to the spawn areas, there are caves which contain large veins of `7`lIron</line>
+				<line>`rYou can use this `7`lIron `rto craft `7`lIron Armor!</line>
+			</message>
+			<teleport>
+				<point yaw="-70" pitch="45">-132.5,56,16.5</point>
+			</teleport>
+		</stage>
+		<stage title="`3`lThe Monuments">
+			<message>
+				<line>`rThe Monuments you have to break are made of `aemerald blocks.</line>
+				<line>`rYou must break `4100% `rof every monument to win!</line>
+			</message>
+			<teleport>
+				<point yaw="90" pitch="20">-13.5,42,0.5</point>
+			</teleport>
+		</stage>
+		<stage title="`r`2`lMonument Locations">
+			<message>
+				<line>`r`3`lValley Monument</line>
+			</message>
+			<teleport>
+				<point yaw="45" pitch="75">-36.5,26,33.5</point>
+			</teleport>
+		</stage>
+		<stage title="`r`2`lMonument Locations">
+			<message>
+				<line>`r`3`lIsland Monument</line>
+			</message>
+			<teleport>
+				<point yaw="-90" pitch="60">79.5,40,0.5</point>
+			</teleport>
+		</stage>
+		<stage title="`r`2`lMonument Locations">
+			<message>
+				<line>`r`3``lHill Monument</line>
+			</message>	
+			<teleport>
+				<point yaw="135" pitch="40">-58.5,53,-30.5</point>
+			</teleport>
+		</stage>
+	</tutorial>
+</map>
