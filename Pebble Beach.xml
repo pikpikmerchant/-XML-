@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<map proto="1.3.1">
+	<include src="tutorial.xml"/>
+	<name>Pebble Beach</name>
+	<version>1.0.1</version>
+	<objective>Eliminate everyone on the other team within 5 minutes!</objective>
+	<authors>
+		<author>Veiyl</author>
+	</authors>
+	<contributors>
+		<contributor contribution="XML">pikpikmerchant</contributor>
+	</contributors>
+	<timelock>on</timelock>
+	<blitz>
+		<time>5m</time>
+		<lives>1</lives>
+	</blitz>
+	<teams>
+		<team color="dark red" max="12">Red Team</team>
+		<team color="blue" max="12">Blue Team</team>
+	</teams>
+	<regions>
+		<rectangle name="map" min="-oo,-oo" max="oo,oo"/>
+		<!-- Applied -->
+		<apply block="deny-all">
+			<region name="map"/>
+		</apply>
+	</regions>
+	<kits>
+		<kit name="spawn">
+			<item slot="0">stone sword</item>
+			<item slot="1">bow</item>
+			<item slot="2" amount="20">arrow</item>
+			<item slot="8" amount="32">bread</item>
+		</kit>
+		<kit name="red" parents="spawn">
+			<helmet color="993333" damage="-3000">leather helmet</helmet>
+			<chestplate color="993333" damage="-3000">leather chestplate</chestplate>
+			<boots color="993333" damage="-3000">leather boots</boots>
+		</kit>
+		<kit name="blue" parents="spawn">
+			<helmet color="334CB2" damage="-3000">leather helmet</helmet>
+			<chestplate color="334CB2" damage="-3000">leather chestplate</chestplate>
+			<boots color="334CB2" damage="-3000">leather boots</boots>
+		</kit>
+	</kits>
+	<spawns>
+		<spawn team="red" kit="red" yaw="145">
+			<block>16.5,16,42.5</block>
+		</spawn>
+		<spawn team="blue" kit="blue" yaw="-40">
+			<block>-15.5,16,-41.5</block>
+		</spawn>
+		<default yaw="90">
+			<cylinder base="-41.5,28,0.5" radius="1" height="0"/>
+		</default>
+	</spawns>
+	<friendlyfirerefund>on</friendlyfirerefund>
+	<itemremove>
+		<item>bread</item>
+		<item>leather helmet</item>
+		<item>leather chestplate</item>
+		<item>leather boots</item>
+	</itemremove>
+	<toolrepair>
+		<tool>stone sword</tool>
+		<tool>bow</tool>
+	</toolrepair>
+	<tutorial>
+		<stage title="`aBlitz">
+			<message>
+				<line>This is a `4`lBlitz `rgamemode map.</line>
+				<line>`You have 1 life. `rUpon death, you will automatically become an observer. `a`lGood Luck!</line>
+			</message>
+		</stage>
+	</tutorial>
+</map>
