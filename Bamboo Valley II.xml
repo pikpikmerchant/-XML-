@@ -2,7 +2,7 @@
 <map proto="1.3.1">
 	<include src="tutorial.xml"/>
 	<name>Bamboo Valley II</name>
-	<version>1.0.0</version>
+	<version>1.0.4</version>
 	<objective>Destroy the other team's 3 Emerald Monuments!</objective>
 	<authors>
 		<author>thestrangeboy1</author>
@@ -16,7 +16,7 @@
 		<team color="blue" max="40">Blue Team</team>
 	</teams>
 	<timelock>on</timelock>
-	<destroyables material="emerald block" completion="100%">
+	<destroyables materials="emerald block" completion="100%">
 		<destroyables owner="red">
 			<destroyable name="Valley Monument">
 				<cuboid min="66,12,-40" max="69,21,-37"/>
@@ -33,7 +33,7 @@
 				<cuboid min="-41,12,41" max="-44,21,38"/>
 			</destroyable>
 			<destroyable name="Island Monument">
-				<cuboid min="-62,28,-1" max="-65,36,2"/>
+				<cuboid min="-62,27,-1" max="-65,36,2"/>
 			</destroyable>
 			<destroyable name="Hill Mounument">
 				<cuboid min="-68,40,-42" max="-71,49,-39"/>
@@ -80,6 +80,9 @@
 		<apply block="only-iron" message="`7You may not interact with team bases!">
 			<region name="bases"/>
 		</apply>
+		<apply use="deny-all">
+			<region name="bases"/>
+		</apply>
 		<apply block="deny-all" message="`7You may not build outside of the playable area!">
 			<negative>
 				<region name="main-area"/>
@@ -90,32 +93,48 @@
 	<kits>
 		<kit name="spawn">
 			<item slot="0">iron sword</item>
-			<item slot="1">bow</item>
-			<!-- [Experimental] Infinite Arrows; Bows w/o Inifinty Enchantment (Electroid told me this would work if it doesn't yell at him and not me) -->
-			<item slot="28" amount="-1">arrow</item>
-			<item slot="2" enchant="dig speed:1;durability:3">iron pickaxe</item>
-			<item slot="3" enchant="dig speed:1;durability:3">iron axe</item>
+			<item slot="1" enchantment="inifinity:1">bow</item>
+			<item slot="28" amount="1">arrow</item>
+			<item slot="2" enchantment="">iron pickaxe</item>
+			<item slot="3" enchantment="dig speed:1;durability:3">iron axe</item>
 			<item slot="4" amount="64" damage="3">logs</item>
 			<item slot="5" amount="64" damage="3">leaves</item>
 			<item slot="6" amount="32">vine</item>
 			<item slot="7" amount="64">cooked chicken</item>
 			<item slot="8" amount="2">golden apple</item>
 			<item slot="35" amount="1">bucket</item>
+			<potion duration="8" amplifier="4" ambient="true">heal</potion>
+			<potion duration="8" amplifier="4" ambient="true">damage resistance</potion>
+		</kit>
+		<kit name="red" parents="spawn">
+			<chestplate color="9933333" enchantment="protection projectile:1" damage="-3000">leather chestplate</chestplate>
+			<boots color="9933333" enchantment="protection fall:1" damage="-3000">leather boots</boots>
+		</kit>
+		<kit name="blue" parents="spawn">
+			<chestplate color="334CB2" enchantment="protection projectile:1" damage="-3000">leather chestplate</chestplate>
+			<boots color="334CB2" enchantment="protection fall:1" damage="-3000">leather boots</boots>
 		</kit>
 	</kits>
 	<spawns>
-		<spawns team="red" kit="spawn">
-			<spawn yaw="-90">
-				<cuboid min="153.5,59,44.5" max="154.5,59,46.5"/>
-			</spawn>
-			<spawn yaw="-90">
-				<cuboid min="153.5,59,-45.5" max="154.5,59,-43.5"/>
-			</spawn>
+		<spawns kit="red">
+			<spawns team="red">
+				<spawn yaw="-90">
+					<cuboid min="153.5,59,44.5" max="154.5,59,46.5"/>
+				</spawn>
+				<spawn yaw="-90">
+					<cuboid min="153.5,59,-45.5" max="154.5,59,-43.5"/>
+				</spawn>
+			</spawns>
 		</spawns>
-		<spawns team="blue" kit="spawn">
-			<spawn yaw="90">
-				<cuboid min="-128.5,59,-43.5" max="-129.5,59,-45.5"/>
-			</spawn>
+		<spawns kit="spawn">
+			<spawns team="blue">
+				<spawn yaw="90">
+					<cuboid min="-128.5,59,-43.5" max="-129.5,59,-45.5"/>
+				</spawn>
+				<spawn yaw="90">
+					<cuboid min="-128.5,59,46.5" max="-129.5,59,44.5"/>
+				</spawn>
+			</spawns>
 		</spawns>
 		<default yaw="180">
 			<cylinder base="12.5,75,-0.5" radius="1" height="0"/>
@@ -162,7 +181,7 @@
 		</stage>
 		<stage title="Spawns">
 			<message>
-				<line>`rThis is wear players `4spawn.</line>
+				<line>`rThis is where players `4spawn.</line>
 				<line>`rPlayers spawn with gear so they ready to are ready to go in to battle!</line>
 			</message>
 			<teleport>
