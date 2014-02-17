@@ -1,0 +1,369 @@
+<?xml version="1.0"?>
+<map proto="1.3.1">
+	<include src="tutorial.xml"/>
+	<name>Renewal</name>
+	<version>1.0.0</version>
+	<objective>Take the enemy's wool located on the enemy's side and place it in your victory monument!</objective>
+	<authors>
+		<author>pikpikmerchant</author>
+		<author>mdog_95</author>
+	</authors>
+	<teams>
+		<team color="dark red" max="15">Red Team</team>
+		<team color="dark green" max="15">Green Team</team>
+	</teams>
+	<wools>
+		<wools team="red">
+			<wool color="blue">
+				<block>-13.5,12,-58.5</block>
+			</wool>
+			<wool color="pink">
+				<block>-6.5,12,-65.5</block>
+			</wool>
+		</wools>
+		<wools team="green">
+			<wool color="orange">
+				<block>-13.5,12,59.5</block>
+			</wool>
+			<wool color="lime">
+				<block>-6.5,13,66.5</block>
+			</wool>
+		</wools>
+	</wools>
+	<timelock>on</timelock>
+	<kits>
+		<!-- Classes (Via Portals) -->
+		<kit name="swordsman">
+			<item slot="0" damage="-3000">iron sword</item>
+			<item slot="1" enchantment="durability:1">stone pickaxe</item>
+			<item slot="2" damage="-3000">iron axe</item>
+			<item slot="3" amount="32">ladder</item>
+			<item slot="8" amount="32">bread</item>
+			<chestplate damage="-3000">iron chestplate</chestplate>
+			<potion duration="6" amplifier="4" ambient="true">heal</potion>
+			<potion duration="6" amplifier="4" ambient="true">damage resistance</potion>
+		</kit>
+		<kit name="archer">
+			<item slot="0" damage="-3000">wood sword</item>
+			<item slot="1" enchantment="arrow infinite:1;arrow damage:1" damage="-3000">bow</item>
+			<item slot="2" enchantment="durability:1">stone pickaxe</item>
+			<item slot="3" damage="-3000">iron axe</item>
+			<item slot="4" amount="16">glass</item>
+			<item slot="8" amount="32">cooked fish</item>
+			<chestplate damage="-3000">chainmail chestplate</chestplate>
+		</kit>
+		<kit name="builder">
+			<item slot="0" damage="-3000">stone sword</item>
+			<item slot="1" enchantment="durability:1;dig speed:2">iron pickaxe</item>
+			<item slot="2" enchantment="dig speed:1" damage="-3000">iron axe</item>
+			<!-- 5 Stacks of Wood -->
+			<item slot="3" amount="64" damage="1">wood</item>
+			<item slot="27" amount="64" damage="1">wood</item>
+			<item slot="28" amount="64" damage="1">wood</item>
+			<item slot="29" amount="64" damage="1">wood</item>
+			<item slot="30" amount="64" damage="1">wood</item>
+			<!-- 2 Stacks of Stone Brick -->
+			<item slot="4" amount="64">smooth brick</item>
+			<item slot="31" amount="64">smooth brick</item>
+			<!-- 1 Stack of Glass -->
+			<item slot="5" amount="64">glass</item>
+			<!-- Quarter Stack of Crafting Benches (For Defensive Purposes) -->
+			<item slot="6" amount="16">workbench</item>
+			<item slot="7" amount="1">bucket</item>
+			<item slot="8" amount="32">steak</item>
+			<chestplate enchantment="protection projectile:1" damage="-3000">leather chestplate</chestplate>
+		</kit>
+	</kits>
+	<!-- Teams spawn under the Observer's Spawn (Like in Anathema) -->
+	<spawns>
+		<spawn team="red" yaw="0">
+			<block>-50.5,60,-4.5</block>
+		</spawn>
+		<spawn team="green" yaw="180">
+			<block>-50.5,60,5.5</block>
+		</spawn>
+		<default yaw="90">
+			<cylinder base="-50.5,65,0.5" radius="2" height="0"/>
+		</default>
+	</spawns>
+	<filters>
+		<filter name="no-void" parents="allow-all">
+			<deny>
+				<void/>
+			</deny>
+		</filter>
+		<filter name="only-red">
+			<team>red</team>
+		</filter>
+		<filter name="only-green">
+			<team>green</team>
+		</filter>
+		<filter name="only-gold-and-iron" parents="deny-all">
+			<allow>
+				<block>gold block</block>
+				<block>iron block</block>
+			</allow>
+		</filter>
+		<!-- Anti-Ice Melt Filter copied from Snowy Wars -->
+		<filter name="deny-icemelt">
+			<not>
+				<all>
+				<!-- DENY if world and ice, ALLOW if not world, ABSTAIN if world and not ice-->
+					<any>
+					<!--  ALLOW if world, DENY else  -->
+						<filter name="allow-world"/>
+						<filter name="deny-all"/>
+					</any>
+					<block>ice</block>
+					<!--  ALLOW if ice, ABSTAIN else  -->
+				</all>
+			</not>
+		</filter>
+	</filters>	
+	<regions>
+		<rectangle name="map" min="-oo,-oo" max="oo,oo"/>
+		<union name="void-area">
+			<rectangle name="void-middle" min="18,36" max="-17,-35"/>
+			<!-- Void area between front lines and RFV1 Style Iron/TNT islands. -->
+			<cuboid name="green-diamond-path" min="=-16,7,19" max="-28,oo,17"/>
+			<cuboid name="red-diamond-path" min="-16,7,-19" max="-28,oo,-16"/>
+		</union>
+		<union name="wool-rooms">
+			<!-- Wool Rooms on Red's Side -->
+			<union name="red-wool-rooms">
+				<rectangle name="orange-wool-room" min="-38,-35" max="-53,-47"/>
+				<rectangle name="lime-wool-room" min="6,-81" max="18,-96"/>
+			</union>
+			<!-- Wool Rooms on Green's Side -->
+			<union name="green-wool-rooms">
+				<rectangle name="blue-wool-room" min="-38,36" max="-53,48"/>
+				<rectangle name="pink-wool-room" min="6,82" max="18,97"/>
+			</union>
+		</union>
+		<union name="bases">
+			<union name="red-base">
+				<cuboid name="red-spawn" min="-8,0,-45" max="7,21,-60"/>
+				<circle name="red-gold" base="-13.5,-65.5" radius=""/>
+			</union>
+			<union name="green-base">
+				<cuboid name="green-spawn" min="-8,0,46" max="7,21,61"/>
+				<circle name="green-gold" base="-13.5,66.5" radius="11"/>
+			</union>
+		</union>
+		<circle name="observers-spawn" base="" radius=""/>
+		<!-- Portals -->
+		<union name="portals">
+			<union name="swordsman-portals">
+				<cuboid name="red-swordsman" min="-45,60,-1" max="-48,63,0"/>
+				<cuboid name="green-swordsman" min="-56,60,2" max="-53,63,1"/>
+			</union>
+			<union name="archer-portals">
+				<cuboid name="red-archer" min="-49,60,-1" max="-52,63,0"/>
+				<cuboid name="green-archer" min="-52,60,2" max="-49,63,1"/>
+			</union>
+			<union name="builder-portals">
+				<cuboid name="red-builder" min="-52,60,-1" max="-55,63,0"/>
+				<cuboid name="green-builder" min="-48,60,2" max="-45,63,1"/>
+			</union>
+		</union>
+		<!-- Applied -->
+		<apply name="deny-icemelt">
+			<region name="map"/>
+		</apply>
+		<apply block="no-void" message="`8You may not build in the void area!">
+			<negative>
+				<region name="void-area"/>
+			</negative>
+		</apply>
+		<apply enter="only-red" message="`8You may not enter your own Wool Room!">
+			<region name="green-wool-rooms"/>
+		</apply>
+		<apply enter="only-green" message="`8You may not enter your own Wool Room!">
+			<region name="red-wool-rooms"/>
+		</apply>
+		<apply block="only-gold-and-iron" message="`8You may only break gold and iron blocks in your base!">
+			<region name="red-gold"/>
+		</apply>
+		<apply block="only-gold-and-iron" message="`8You may only break gold and iron blocks in your base!">
+			<region name="green-gold"/>
+		</apply>
+		<apply block="deny-all" message="`8You may not modify the spawn area!">
+			<region name="red-spawn"/>
+		</apply>
+		<apply block="deny-all" message="`8You may not modify the spawn area!">
+			<region name="green-spawn"/>
+		</apply>
+		<apply enter="only-red" message="`8You may not enter the `4`lRed Team's `r`8base!">
+			<region name="red-base"/>
+		</apply>
+		<apply enter="only-green" message="`8You may not enter the `2`lGreen Team's `r`8base!">
+			<region name="green-base"/>
+		</apply>
+		<apply block="deny-all" message="`8You may not modify the spawn area!">
+			<region name="observers-spawn"/>
+		</apply>
+		<!-- Applies Kits to Portals -->
+		<apply kit="swordsman">
+			<region name="swordsman-portals"/>
+		</apply>
+		<apply kit="archer">
+			<region name="archer-portals"/>
+		</apply>
+		<apply kit="builder">
+			<region name="builder-portals"/>
+		</apply>
+	</regions>
+	<maxbuildheight>21</maxbuildheight>
+	<!-- Portals (Likely in need of revisions) -->
+	<portals>
+		<portal x="@-0.5" y="@9" z="@-52">
+			<region name="red-swordsman"/>
+		</portal>
+		<portal x="@-0.5" y="@9" z="@-52">
+			<region name="red-archer"/>
+		</portal>
+		<portal x="@-0.5" y="@9" z="@-52">
+			<region name="red-builder"/>
+		</portal>
+		<portal x="@-0.5" y="@9" z="@53.5">
+			<region name="green-swordsman"/>
+		</portal>
+		<portal x="@-0.5" y="@9" z="@53.5">
+			<region name="green-archer"/>
+		</portal>
+		<portal x="@-0.5" y="@9" z="@53.5">
+			<region name="green-builder"/>
+		</portal>
+	</portals>
+	<killreward>
+		<item amount="1">golden apple</item>
+	</killreward>
+	<itemremove>
+		<!-- Drops from Map -->
+		<item>smooth brick</item>
+		<item>step</item>
+		<item>cobblestone stairs</item>
+		<item>smooth stairs</item>
+		<item>fence</item>
+		<item>cobble wall</item>
+		<item damage="3">step</item>
+		<item damage="5">step</item>
+		<item>iron fence</item>
+		<item damage="14">wool</item>
+		<item damage="13">wool</item>
+		<item>ladder</item>
+		<item damage="1">wood</item>
+		<item>glass</item>
+		<item>sapling</item>
+		<item>glass bottle</item>
+		<!-- Stained Clay -->
+		<item damage="1">159</item>
+		<item damage="14">159</item>
+		<item damage="6">159</item>
+		<item damage="11">159</item>
+		<item damage="13">159</item>
+		<item damage="5">159</item>
+		<!-- Class/Kit Items -->
+		<item>wood sword</item>
+		<item>stone sword</item>
+		<item>iron sword</item>
+		<item>bow</item>
+		<item>stone pickaxe</item>
+		<item>iron pickaxe</item>
+		<item>iron axe</item>
+		<item>bucket</item>
+		<item>water bucket</item>
+		<item>leather chestplate</item>
+		<item>chainmail chestplate</item>
+		<item>iron chestplate</item>
+		<item>bread</item>
+		<item>cooked fish</item>
+		<item>steak</item>
+	</itemremove>
+	<tutorial>
+		<stage title="`r`a`lCapture The Wool">
+			<message>
+				<line>`rThis is a `a`lCapture The Wool `rmap.</line>
+				<line>`rThe goal is to take the `3`lWool `rfrom a `2`lWool Rooms `rlocated on your enemy's side and place it in your `9`lWool Monument.</line>
+			</message>
+		</stage>
+		<stage title="`2`lWool Rooms `r`3`l(Part 1)">
+			<message>
+				<line>`rThis is a `2`lWool Room.</line>
+				<line>`rPart of the objective, as previously stated, is to enter a wool room such as this one.</line>
+			</message>
+			<teleport>
+				<point yaw="45" pitch="30">-37.5,20,-48.4</point>
+			</teleport>
+		</stage>
+		<stage title="`2`lWool Rooms `r`3`l(Part 2)">
+			<message>
+				<line>`rAfter making it inside, you must take some `3`lWool `rfrom a chest.</line>
+				<line>`rThere is also gear inside the `2`lWool Room `rto help you make it back to your own side.</line>
+				<line>`r`4`lPlease note that taking all of the wool from a wool room is a punishable offense.</line>
+			</message>
+		</stage>
+		<stage title="`9`lWool Monuments">
+			<message>
+				<line>`rThis is a `9`lWool Monument.</line>
+				<line>`rAfter returning with a wool from a `c`lWool Room`r, you must place the `3`lWool here.</line>
+			</message>
+		</stage>
+		<stage title="`4`lClasses `3`l(Part 1)">
+			<message>
+				<line>`rThis map is based on `4`lClass Gameplay.</line>
+				<line>`rUpon spawning, you will be able to choose a `4`lClass `r`8(`8`lSwordsman`r, `2`lArcher`r, or `6`lBuilder`r`8) `rby entering any one of these `3`lPortals`r. `rEach class gives you different items.</line>
+			</message>
+			<teleport>
+				<point yaw="0" pitch="0">-50.5,60,-4.5</point>
+			</teleport>
+		</stage>
+		<stage title="`4`lClasses `3`l(Part 2)">
+			<message>
+				<line>`r`3`lYou can view what each class has by right-clicking these chests.</line>
+			</message>
+			<teleport>
+				<point yaw="-90" pitch="-35">-46.5,65,0.5</point>
+			</teleport>
+		</stage>
+		<stage title="`6`lBases">
+			<message>
+				<line>`rAfter entering choosing your class by entering a portal, you will be teleported to your base.</line>
+				<line>`r`3`lSome things to know about team bases:</line>
+				<line>`rBases is indestructible.</line>
+				<line>`rA member from one team cannot enter the base of the other team.</line>
+			</message>
+			<teleport>
+				<point yaw="0" pitch="-30">-0.5,9,40.5</point>
+			</teleport>
+		</stage> 
+		<stage title="`6`lGold `7and `8`lIron `7Supply">
+			<message>
+				<line>`rNext to your base is a supply of `6Gold`r. You can use it to craft `3`lArmor`r.</line>
+				<line>`rThere is also a minimal amount of `8Iron`r. Use it wisely</line>
+			</message>
+			<teleport>
+				<point yaw="45" pitch="45">-9.5,19,62.5</point>
+			</teleport>
+		</stage>
+		<stage title="`4`lTNT`7/`8`lIron `7Island">
+			<message>
+				<line>`7*This is based on the TNT/Diamond islands from RFV1</line>
+				<line>`rThis island contains a supply of `8`lIron `rand `4`lTNT.</line>
+				<line>`r`3`lIf the minecart on top is shot, the island will Explode and you will lose these supplies.</line>
+			</message>
+			<teleport>
+				<point yaw="45" pitch="50">-25.5,15,-22.5</point>
+			</teleport>
+		</stage>
+		<stage title="`a`lFront Lines">
+			<message>
+				<line>`rThis is the `a`lFront Lines`r. The majority of the action takes place here.</line>
+				<line>`rIt is reccomended that you create a `7`lWide Glass Staircase `rin order to gain an height advantage over your enemy.</line>
+			</message>
+			<teleport>
+				<point yaw="0" pitch="30">0.5,21,2.5</point>
+			</teleport>
+		</stage>
+	</tutorial>
+</map>
