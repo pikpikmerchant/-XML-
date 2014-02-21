@@ -2,7 +2,7 @@
 <map proto="1.3.1">
 	<include src="tutorial.xml"/>
 	<name>Renewal</name>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<objective>Take the enemy's wool located on the enemy's side and place it in your victory monument!</objective>
 	<authors>
 		<author>pikpikmerchant</author>
@@ -104,7 +104,16 @@
 				<block>iron block</block>
 			</allow>
 		</filter>
-		<!-- Anti-Ice Melt Filter copied from Snowy Wars -->
+		<filter name="deny-storage" parents="allow-all">
+			<deny>
+				<block>chest</block>
+				<block>furnace</block>
+				<block>dropper</block>
+				<block>dispenser</block>
+				<block>hopper</block>
+			</deny>
+		</filter>
+		<!-- Anti-Ice Melt Filter replicated from Snowy Wars -->
 		<filter name="deny-icemelt">
 			<not>
 				<all>
@@ -118,6 +127,15 @@
 					<!--  ALLOW if ice, ABSTAIN else  -->
 				</all>
 			</not>
+		</filter>
+		<!-- Filter defining blocks that are interactable in the wool rooms -->
+		<filter name="only-blocks" parents="deny-all">
+			<allow>
+				<block damage="1">wood</block>
+				<block>glass</block>
+				<block>smooth brick</block>
+				<block>ladder</block>
+			</allow>
 		</filter>
 	</filters>	
 	<regions>
@@ -140,6 +158,7 @@
 				<rectangle name="pink-wool-room" min="6,82" max="18,97"/>
 			</union>
 		</union>
+		<!-- Bases -->
 		<union name="bases">
 			<union name="red-base">
 				<cuboid name="red-spawn" min="-8,0,-45" max="7,21,-60"/>
@@ -167,7 +186,10 @@
 			</union>
 		</union>
 		<!-- Applied -->
-		<apply name="deny-icemelt">
+		<apply block="deny-icemelt">
+			<region name="map"/>
+		</apply>
+		<apply block="deny-storage" use="deny-storage">
 			<region name="map"/>
 		</apply>
 		<apply block="no-void" message="`8You may not build in the void area!">
@@ -175,12 +197,17 @@
 				<region name="void-area"/>
 			</negative>
 		</apply>
+		<!-- Wool Room Protection -->
+		<apply block="only-blocks">
+			<region name="wool-rooms"/>
+		</apply>
 		<apply enter="only-red" message="`8You may not enter your own Wool Room!">
 			<region name="green-wool-rooms"/>
 		</apply>
 		<apply enter="only-green" message="`8You may not enter your own Wool Room!">
 			<region name="red-wool-rooms"/>
 		</apply>
+		<!-- Spawn Protection -->
 		<apply block="only-gold-and-iron" message="`8You may only break gold and iron blocks in your base!">
 			<region name="red-gold"/>
 		</apply>
@@ -214,7 +241,7 @@
 		</apply>
 	</regions>
 	<maxbuildheight>21</maxbuildheight>
-	<!-- Portals (Likely in need of revisions) -->
+	<!-- Portals -->
 	<portals>
 		<portal x="@-0.5" y="@9" z="@-52">
 			<region name="red-swordsman"/>
@@ -235,9 +262,6 @@
 			<region name="green-builder"/>
 		</portal>
 	</portals>
-	<killreward>
-		<item amount="1">golden apple</item>
-	</killreward>
 	<itemremove>
 		<!-- Drops from Map -->
 		<item>smooth brick</item>
