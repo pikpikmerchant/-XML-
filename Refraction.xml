@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<map proto="1.3.1">
+	<name>Refraction</name>
+	<version>1.0.0</version>
+	<objective>Take the enemy's wool located on the enemy's side and place it in your victory monument!</objective>
+	<authors>
+		<author>JTerwiesch</author>
+		<author>moo88888888</author>
+		<author>Draco_Rogue</author>
+		<author>chickolympics</author>
+	</authors>
+	<tutorial>
+		<stage title="`r`a`lCapture The Wool">
+			<message>
+				<line>`rThis is a `a`lCapture The Wool `rmap.</line>
+				<line>`rThe goal is to take the `3`lWool `rfrom a `2`lWool Rooms `rlocated on your enemy's side and place it in your `9`lWool Monument.</line>
+			</message>
+		</stage>
+		<stage title="`2`lWool Rooms `r`3`l(Part 1)">
+			<message>
+				<line>`rThis is a `2`lWool Room.</line>
+				<line>`rPart of the objective, as previously stated, is to enter a wool room such as this one.</line>
+			</message>
+			<teleport>
+				<point yaw="0" pitch="30">87.5,23,198.5</point>
+			</teleport>
+		</stage>
+		<stage title="`2`lWool Rooms `r`3`l(Part 2)">
+			<message>
+				<line>`rAfter making it inside, you must take some `3`lWool `rfrom a chest.</line>
+				<line>`rThere is gear inside the `2`lWool Room `rto help you make it back to your own side.</line>
+			</message>
+		</stage>
+		<stage title="`9`lWool Monuments">
+			<message>
+				<line>`rThis is a `9`lWool Monument.</line>
+				<line>`rAfter returning with a wool from a `c`lWool Room`r, you must place the `3`lWool here.</line>
+			</message>
+			<teleport>
+				<point yaw="180" pitch="10">2.5,13,67.5</point>
+			</teleport>
+		</stage>
+		<stage title="`3`lSpawn Areas">
+			<message>
+				<line>`rWhen the game begins, you will `5spawn `rhere.</line>
+				<line>`rYou can grab `agear `rfrom the chests in the sides of the spawn area. You can enter into battle by entering the `cportal`r, which you face as you spawn.</line>
+			</message>
+			<teleport>
+				<point pitch="-45" yaw="20">-32.5,34,32.5</point>
+			</teleport>
+		</stage>
+		<stage title="`7`lIron">
+			<message>
+				<line>In the middle of each side is a large mass of `7Iron</line>
+				<line>You can use this armor to craft `3`lArmor.</line>
+			</message>
+			<teleport>
+				<point yaw="-135" pitch="20">3.5,22,81.5</point>
+			</teleport>
+		</stage> 
+	</tutorial>
+	<timelock>on</timelock>
+	<friendlyfirerefund>on</friendlyfirerefund>
+	<wools team="red">
+		<wool color="green">
+			<block>2.5,14,64.5</block>
+		</wool>
+		<wool color="yellow">
+			<block>-1.5,14,68.5</block>
+		</wool>
+	</wools>
+	<wools team="blue">
+		<wool color="purple">
+			<block>94.5,14,164.5</block>
+		</wool>
+		<wool color="pink">
+			<block>98.5,14,160.5</block>
+		</wool>
+	</wools>
+	<teams>
+		<team color="dark red" max="32">Red Team</team>
+		<team color="blue" max="32">Blue Team</team>
+	</teams>
+	<!-- No Kits; Spawn Chests -->
+	<spawns>
+		<spawn team="red" yaw="-45">
+			<cylinder base="-30.5,27,34.5" radius="2" height="0"/>
+		</spawn>
+		<spawn team="" yaw="135">
+			<cylinder base="127.5,27,194.5" radius="2" height="0"/>
+		</spawn>
+		<default yaw="90">
+			<cylinder base="48.5,63,114.5" radius="1" height="0"/>
+		</default>
+	</spawns>
+	<filters>
+		<filter name="no-void" parents="allow-all">
+			<deny>
+				<void/>
+			</deny>
+		</filter>
+		<filter name="only-red">
+			<team>red</team>
+		</filter>
+		<filter name="only-blue">
+			<team>blue</team>
+		</filter>
+	</filters>
+	<regions>
+		<rectangle name="map" min="-oo,-oo" max="oo,oo"/>
+		<!-- Middle Area where void building (Bridging) is allowed -->
+		<rectangle name="void-area" min="34,100" max="63,129"/>
+		<!-- Spawns -->
+		<union name="spawns">
+			<circle name="red-spawn" center="-30.5,27,34.5" radius="20"/>
+			<circle name="blue-spawn" center="127.5,27,194.5" radius="20"/>
+		</union>
+		<union name="wool-rooms">
+			<!-- Wool Rooms on Red's Side; Blue has to enter -->
+			<union name="red-wool-rooms">
+				<rectangle name="pink-wool" min="-43,84" max="-58,67"/>
+				<rectangle name="purple-wool" min="1,23" max="18,8"/>
+			</union>
+			<!-- Wool Rooms on Blue's Side; Red has to enter -->
+			<union name="blue-wool-rooms">
+				<rectangle name="yellow-wool" min="140,145" max="155,162"/>
+				<rectangle name="green-wool" min="96,206" max="79,221"/>
+			</union>
+		</union>
+		<!-- Area around portals that teleport you to spawn -->
+		<union name="portal-area">
+			<rectangle name="red-portal-area" min="" max=""/>
+			<rectangle name="blue-portal-area" min="98,175" max="109,164"/>
+		</union>
+		<!-- Applied -->
+		<apply block="no-void" message="`cYou may not build in the void area!">
+			<negative>
+				<region name="void-area"/>
+			</negative>
+		</apply>
+		<!-- Disables Block Interaction withing the spawn areas -->
+		<apply block="deny-all" message="`8You may not modify the base!">
+			<region name="spawns"/>
+		</apply>
+		<!-- Prevents Players from entering their own Wool Rooms -->
+		<apply enter="only-red" message="`cYou may not enter your own wool room!">
+			<region name="blue-wool-rooms"/>
+		</apply>
+		<apply enter="only-blue" message="`cYou may not enter your own wool room!">
+			<region name="red-wool-rooms"/>
+		</apply>
+		<!-- Prevents Players from interacting with their own Wool Rooms -->
+		<apply block="only-red" use="only-red">
+			<region name="blue-wool-rooms"/>
+		</apply>
+		<apply block="only-blue" use="only-blue">
+			<region name="red-wool-rooms"/>
+		</apply>
+		<!-- Prevents players from entering the other team's portals  -->
+		<apply enter="only-red" message="`cYou may not enter the other team's portal!">
+			<region name="red-portal-area"/>
+		</apply>
+		<apply enter="only-blue" message="`cYou may not enter the other team's portal!">
+			<region name="blue-portal-area"/>
+		</apply>
+		<!-- Disables Block interaction near portals -->
+		<apply block="deny-all">
+			<region name="portal-area"/>
+		</apply>
+		<!-- Portals -->
+		<cuboid name="red-spawn-portal" min="-22.5,26,,42.5" max="-22.5,31,42.5"/>
+		<cuboid name="red-portal" min="-6.5,12,59.5" max="-6.5,17,59.5"/>
+		<cuboid name="blue-spawn-portal" min="119.5,26,186.5" max="119.5,31,186.5"/>
+		<cuboid name="blue-portal" min="103.5,12,169.5" max="103.5,17,169.5"/>
+	</regions>
+	<maxbuildheight>40</maxbuildheight>
+	<portals>
+		<portal x="@-5.5" y="@13" z="@60.5" yaw="-45">
+			<region name="red-spawn-portal"/>
+		</portal>
+		<portal x="@-23.5" y="@27" z="@41.5" yaw="135">
+			<region name="red-portal"/>
+		</portal>
+		<portal x="@102.5" y="@13" z="@168.5" yaw="135">
+			<region name="blue-spawn-portal"/>
+		</portal>
+		<portal x="@120.5" y="@27" z="@187.5" yaw="-45">
+			<region name="blue-portal"/>
+		</portal>
+	</portals>
+	<toolrepair>
+		<tool>iron sword</tool>
+		<tool>bow</tool>
+		<tool>iron pickaxe</tool>
+		<tool>iron axe</tool>
+	</toolrepair>
+	<itemremove>
+		<item>glowstone dust</item>
+		<item>string</item>
+		<item>trap door</item>
+		<item damage="1">quartz block</item>
+		<item>note block</item>
+		<item damage="3">smooth brick</item>
+		<item>smooth brick</item>
+		<item>step</item>
+		<item damage="3">step</item>
+		<item damage="5">step</item>
+		<item>cobblestone stairs</item>
+		<item>smooth stairs</item>
+		<item>fence</item>
+		<item>cobble wall</item>
+		<item damage="3">step</item>
+		<item damage="5">step</item>
+		<item damage="14">wool</item>
+		<item damage="11">wool</item>
+		<item damage="13">stained clay</item>
+		<item damage="4">stained clay</item>
+		<item damage="6">stained clay</item>
+		<item damage="10">stained clay</item>
+	</itemremove>
+</map>
