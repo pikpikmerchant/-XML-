@@ -1,13 +1,101 @@
 <?xml version="1.0"?>
 <map proto="1.3.1">
-	<include src="tutorial.xml"/>
 	<name>Renewal</name>
-	<version>1.1.0</version>
+	<version>1.1.1</version>
 	<objective>Take the enemy's wool located on the enemy's side and place it in your victory monument!</objective>
 	<authors>
 		<author>pikpikmerchant</author>
 		<author>mdog_95</author>
 	</authors>
+	<include src="tutorial.xml"/>
+	<tutorial>
+		<stage title="`r`a`lCapture The Wool">
+			<message>
+				<line>`rThis is a `a`lCapture The Wool `rmap.</line>
+				<line>`rThe goal is to take the `3`lWool `rfrom a `2`lWool Rooms `rlocated on your enemy's side and place it in your `9`lWool Monument.</line>
+			</message>
+		</stage>
+		<stage title="`2`lWool Rooms `r`3`l(Part 1)">
+			<message>
+				<line>`rThis is a `2`lWool Room.</line>
+				<line>`rPart of the objective, as previously stated, is to enter a wool room such as this one.</line>
+			</message>
+			<teleport>
+				<point yaw="45" pitch="30">-37.5,20,-48.4</point>
+			</teleport>
+		</stage>
+		<stage title="`2`lWool Rooms `r`3`l(Part 2)">
+			<message>
+				<line>`rAfter making it inside, you must take some `3`lWool `rfrom a chest.</line>
+				<line>`rThere is gear inside the `2`lWool Room `rto help you make it back to your own side.</line>
+			</message>
+		</stage>
+		<stage title="`9`lWool Monuments">
+			<message>
+				<line>`rThis is a `9`lWool Monument.</line>
+				<line>`rAfter returning with a wool from a `c`lWool Room`r, you must place the `3`lWool here.</line>
+			</message>
+			<teleport>
+				<point yaw="180" pitch="25">-13.5,12,62.5</point>
+			</teleport>
+		</stage>
+		<stage title="`4`lClasses `3`l(Part 1)">
+			<message>
+				<line>`rThis map is based on `4`lClass Gameplay.</line>
+				<line>`rUpon spawning, you will be able to choose a `4`lClass `r`8(`8`lSwordsman`r, `2`lArcher`r, or `6`lBuilder`r`8) `rby entering any one of these `3`lPortals`r. `rEach class gives you different items.</line>
+			</message>
+			<teleport>
+				<point yaw="0" pitch="0">-50.5,60,-4.5</point>
+			</teleport>
+		</stage>
+		<stage title="`4`lClasses `3`l(Part 2)">
+			<message>
+				<line>`r`3`lYou can view what each class has by right-clicking these chests.</line>
+			</message>
+			<teleport>
+				<point yaw="-90" pitch="-35">-46.5,65,0.5</point>
+			</teleport>
+		</stage>
+		<stage title="`6`lBases">
+			<message>
+				<line>`rAfter entering choosing your class by entering a portal, you will be teleported to your base.</line>
+				<line>`r`3`lSome things to know about team bases:</line>
+				<line>`rBases is indestructible.</line>
+				<line>`rA member from one team cannot enter the base of the other team.</line>
+			</message>
+			<teleport>
+				<point yaw="0" pitch="-30">-0.5,9,40.5</point>
+			</teleport>
+		</stage> 
+		<stage title="`6`lGold `7and `8`lIron `7Supply">
+			<message>
+				<line>`rNext to your base is a supply of `6Gold`r. You can use it to craft `3`lArmor`r.</line>
+				<line>`rThere is also a minimal amount of `8Iron`r. Use it wisely</line>
+			</message>
+			<teleport>
+				<point yaw="45" pitch="45">-9.5,19,62.5</point>
+			</teleport>
+		</stage>
+		<stage title="`4`lTNT`7/`8`lIron `7Island">
+			<message>
+				<line>`7*This is based on the TNT/Diamond islands from RFV1</line>
+				<line>`rThis island contains a supply of `8`lIron `rand `4`lTNT.</line>
+				<line>`r`3`lIf the minecart on top is shot, the island will Explode and you will lose these supplies.</line>
+			</message>
+			<teleport>
+				<point yaw="45" pitch="50">-25.5,15,-22.5</point>
+			</teleport>
+		</stage>
+		<stage title="`a`lFront Lines">
+			<message>
+				<line>`rThis is the `a`lFront Lines`r. The majority of the action takes place here.</line>
+				<line>`rIt is reccomended that you create a `7`lWide Glass Staircase `rin order to gain an height advantage over your enemy.</line>
+			</message>
+			<teleport>
+				<point yaw="0" pitch="30">0.5,21,2.5</point>
+			</teleport>
+		</stage>
+	</tutorial>
 	<teams>
 		<team color="dark red" max="15">Red Team</team>
 		<team color="dark green" max="15">Green Team</team>
@@ -140,12 +228,6 @@
 	</filters>	
 	<regions>
 		<rectangle name="map" min="-oo,-oo" max="oo,oo"/>
-		<union name="void-area">
-			<rectangle name="void-middle" min="18,36" max="-17,-35"/>
-			<!-- Void area between front lines and RFV1 Style Iron/TNT islands. -->
-			<cuboid name="green-diamond-path" min="=-16,7,19" max="-28,oo,17"/>
-			<cuboid name="red-diamond-path" min="-16,7,-19" max="-28,oo,-16"/>
-		</union>
 		<union name="wool-rooms">
 			<!-- Wool Rooms on Red's Side -->
 			<union name="red-wool-rooms">
@@ -162,14 +244,15 @@
 		<union name="bases">
 			<union name="red-base">
 				<cuboid name="red-spawn" min="-8,0,-45" max="7,21,-60"/>
-				<circle name="red-gold" base="-13.5,-65.5" radius=""/>
+				<circle name="red-gold" base="-13.5,-65.5" radius="11"/>
 			</union>
 			<union name="green-base">
 				<cuboid name="green-spawn" min="-8,0,46" max="7,21,61"/>
 				<circle name="green-gold" base="-13.5,66.5" radius="11"/>
 			</union>
 		</union>
-		<circle name="observers-spawn" base="" radius=""/>
+		<!-- Observers Spawn -->
+		<circle name="observers-spawn" base="-50.5" radius="9"/>
 		<!-- Portals -->
 		<union name="portals">
 			<union name="swordsman-portals">
@@ -184,6 +267,12 @@
 				<cuboid name="red-builder" min="-52,60,-1" max="-55,63,0"/>
 				<cuboid name="green-builder" min="-48,60,2" max="-45,63,1"/>
 			</union>
+		</union>
+		<!-- Buildable void area -->
+		<union name="void-area">
+			<rectangle name="void-middle" min="18,36" max="-17,-35"/>
+			<circle name="red-gold" base="-13.5,-65.5" radius="11"/>
+			<circle name="green-gold" base="-13.5,66.5" radius="11"/>
 		</union>
 		<!-- Applied -->
 		<apply block="deny-icemelt">
@@ -304,90 +393,4 @@
 		<item>cooked fish</item>
 		<item>steak</item>
 	</itemremove>
-	<tutorial>
-		<stage title="`r`a`lCapture The Wool">
-			<message>
-				<line>`rThis is a `a`lCapture The Wool `rmap.</line>
-				<line>`rThe goal is to take the `3`lWool `rfrom a `2`lWool Rooms `rlocated on your enemy's side and place it in your `9`lWool Monument.</line>
-			</message>
-		</stage>
-		<stage title="`2`lWool Rooms `r`3`l(Part 1)">
-			<message>
-				<line>`rThis is a `2`lWool Room.</line>
-				<line>`rPart of the objective, as previously stated, is to enter a wool room such as this one.</line>
-			</message>
-			<teleport>
-				<point yaw="45" pitch="30">-37.5,20,-48.4</point>
-			</teleport>
-		</stage>
-		<stage title="`2`lWool Rooms `r`3`l(Part 2)">
-			<message>
-				<line>`rAfter making it inside, you must take some `3`lWool `rfrom a chest.</line>
-				<line>`rThere is also gear inside the `2`lWool Room `rto help you make it back to your own side.</line>
-				<line>`r`4`lPlease note that taking all of the wool from a wool room is a punishable offense.</line>
-			</message>
-		</stage>
-		<stage title="`9`lWool Monuments">
-			<message>
-				<line>`rThis is a `9`lWool Monument.</line>
-				<line>`rAfter returning with a wool from a `c`lWool Room`r, you must place the `3`lWool here.</line>
-			</message>
-		</stage>
-		<stage title="`4`lClasses `3`l(Part 1)">
-			<message>
-				<line>`rThis map is based on `4`lClass Gameplay.</line>
-				<line>`rUpon spawning, you will be able to choose a `4`lClass `r`8(`8`lSwordsman`r, `2`lArcher`r, or `6`lBuilder`r`8) `rby entering any one of these `3`lPortals`r. `rEach class gives you different items.</line>
-			</message>
-			<teleport>
-				<point yaw="0" pitch="0">-50.5,60,-4.5</point>
-			</teleport>
-		</stage>
-		<stage title="`4`lClasses `3`l(Part 2)">
-			<message>
-				<line>`r`3`lYou can view what each class has by right-clicking these chests.</line>
-			</message>
-			<teleport>
-				<point yaw="-90" pitch="-35">-46.5,65,0.5</point>
-			</teleport>
-		</stage>
-		<stage title="`6`lBases">
-			<message>
-				<line>`rAfter entering choosing your class by entering a portal, you will be teleported to your base.</line>
-				<line>`r`3`lSome things to know about team bases:</line>
-				<line>`rBases is indestructible.</line>
-				<line>`rA member from one team cannot enter the base of the other team.</line>
-			</message>
-			<teleport>
-				<point yaw="0" pitch="-30">-0.5,9,40.5</point>
-			</teleport>
-		</stage> 
-		<stage title="`6`lGold `7and `8`lIron `7Supply">
-			<message>
-				<line>`rNext to your base is a supply of `6Gold`r. You can use it to craft `3`lArmor`r.</line>
-				<line>`rThere is also a minimal amount of `8Iron`r. Use it wisely</line>
-			</message>
-			<teleport>
-				<point yaw="45" pitch="45">-9.5,19,62.5</point>
-			</teleport>
-		</stage>
-		<stage title="`4`lTNT`7/`8`lIron `7Island">
-			<message>
-				<line>`7*This is based on the TNT/Diamond islands from RFV1</line>
-				<line>`rThis island contains a supply of `8`lIron `rand `4`lTNT.</line>
-				<line>`r`3`lIf the minecart on top is shot, the island will Explode and you will lose these supplies.</line>
-			</message>
-			<teleport>
-				<point yaw="45" pitch="50">-25.5,15,-22.5</point>
-			</teleport>
-		</stage>
-		<stage title="`a`lFront Lines">
-			<message>
-				<line>`rThis is the `a`lFront Lines`r. The majority of the action takes place here.</line>
-				<line>`rIt is reccomended that you create a `7`lWide Glass Staircase `rin order to gain an height advantage over your enemy.</line>
-			</message>
-			<teleport>
-				<point yaw="0" pitch="30">0.5,21,2.5</point>
-			</teleport>
-		</stage>
-	</tutorial>
 </map>
