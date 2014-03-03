@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<map proto="1.3.1">
+	<include src="tutorial.xml"/>
+	<name>Glava</name>
+	<version>1.1.0</version>
+	<objective>Attackers: Destroy 90% the Defenders's Monument! Defenders: Prevent the Attackers from destroying your monument for 15 minutes!</objective>
+	<authors>
+		<author>Qixit</author>
+	</authors>
+	<contributors>
+		<contributor contribution="XML">pikpikmerchant</contributor>
+	</contributors>
+	<include src="tutorial.xml"/>
+	<tutorial>
+		<stage title="`a`lAttack and Defense (AnD)">
+			<message>
+				<line>This is an Attack and Defense map.</line>
+				<line>The goal of the Attackers is to destroy the Defneders Monument.</line>
+				<line>The goal of the Defenders is to keep the attackers from destroying their monument for 15 minutes.</line>
+			</message>
+		</stage>
+		<stage title="`3The Monuemnt">
+			<message>
+				<line>This is the Defenders Monument. It has an outer layer of obsidian with beacons inside.</line>
+				<line>The attackers must break the outer obsidian layer so they can destroy 90% of the becaons inside. The Defenders must prevent the Attackers from doing so.</line>
+			</message>
+			<teleport>
+				<point yaw="-135" pitch="45">-396.5,81,75.5</point>
+			</teleport>
+		</stage>
+		<stage title="`b`lDiamonds">
+			<message>
+				<line>In front of the Defesnders spawn, there are spawners that spawn diamond blocks. When mined, the blocks will drop 9 diamonds.</line>
+				<line>Defenders can use diamonds to craft tools and armor.</line>
+			</message>
+		</stage>
+	</tutorial>
+	<!-- Monument Attackers Need To Destroy -->
+	<destroyables materials="beacon" name="Monument" completion="90%">
+		<destroyable owner="defenders">
+			<cuboid min="-395,66,-87" max="-385,76,-77"/>
+		</destroyable>
+	</destroyables>
+	<!-- Defenders win if 15 minutes pass before the monument is destroyed -->
+	<time result="defenders">900</time>
+	<teams>
+		<team color="dark green" max="10" max-overfill="12">Defenders</team>
+		<team color="yellow" max="30">Attackers</team>
+	</teams>
+	<disabledamage>
+		<damage>fall</damage>
+	</disabledamage>
+	<hunger>
+    	<depletion>off</depletion>
+	</hunger>
+	<kits>
+		<kit name="spawn">
+			<item slot="0">stone sword</item>
+			<item slot="1">bow</item>
+			<item slot="28">arrow</item>
+			<item slot="19">arrow</item>
+			<item slot="2">diamond pickaxe</item>
+			<item slot="3" damage="1" amount="16">wood</item>
+			<item slot="4" damage="14" amount="64">stained clay</item>
+			<item slot="5" damage="14" amount="64">stained clay</item>
+			<item slot="6" damage="14" amount="64">stained clay</item>
+			<item slot="8" amount="3">golden apple</item>
+			<helmet damage="-3000">chainmail helmet</helmet>
+			<chestplate damage="-3000">chainmail chestplate</chestplate>
+			<leggings damage="-3000">chainmail leggings</leggings>
+			<boots damage="-3000">chainmail boots</boots>
+			<potion duration="10" amplifier="4" ambient="true">damage resistance</potion>
+			<potion duration="10" amplifier="4" ambient="true">heal</potion> 
+		</kit>
+	</kits>
+	<toolrepair>
+		<tool>stone sword</tool>
+		<tool>bow</tool>
+		<tool>diamond pickaxe</tool>
+	</toolrepair>
+	<itemremove>
+		<item>redstone lamp off</item>
+		<item>chain helmet</item>
+		<item>chain chestplate</item>
+		<item>chain leggings</item>
+		<item>chain boots</item>
+		<item>diamond sword</item>
+		<item>diamond axe</item>
+		<item>diamond helmet</item>
+		<item>diamond chestplate</item>
+		<item>diamond leggings</item>
+		<item>diamond boots</item>
+		<item>diamond block</item>
+	</itemremove>
+	<spawns>
+		<spawn team="defenders" kit="spawn" yaw="0">
+			<cuboid min="-386,89m-160" max="-391,89,,-158"/>
+		</spawn>
+		<spawn team="attackers" kit="spawn" yaw="180">
+			<cuboid min="-392,2,-102" max="-388,2,-104"/>
+		</spawn>
+		<default yaw="90">
+			<block>-389.5,140,-133.5</block>
+		</default>
+	</spawns>
+	<filters>
+		<filter name="only-defenders">
+			<team>defenders</team>
+		</filter>
+		<filter name="only-attackers">
+			<team>attackers</team>
+		</filter>
+		<filter name="only-diamond" parents="deny-all">
+			<allow>
+				<block>diamond block</block>
+			</allow>
+		</filter>
+	</filters>
+	<regions>
+		<rectangle name="map" min="-oo,-oo" max="oo,oo"/>
+		<union name="spawns">
+			<cuboid name="defenders-spawn" min="-382,83,-169" max="-394,oo,-146"/>
+			<cuboid name="attackers-spawn" min="-401,1,-96" max="-379,2,-113"/>
+		</union>
+		<rectangle name="diamond-area" min="-405,89,-114" max="-373,oo,-118"/>
+		<!-- Applied -->
+		<apply block="deny-all" message="`7You may not edit you spawn areas!">
+			<region name="spawns"/>
+		</apply>
+		<apply block="only-diamond" message="`7You may only interact with diamond blocks in this area!">
+			<region name="diamond-area"/>
+		</apply>
+	</regions>
+	<!-- I had to put diamond blocks into itemremove because some of them were dropping from the spawner down to the attacker's area, which would allow them to create diamond armor much too easily. I proceeded to fix this by making diamond blocks drop 9 diamonds whem mined. -->
+	<blockdrops>
+		<rule>
+			<region>
+				<region name="diamond-area"/>
+			</region>
+			<block>diamond block</block>
+			<drops>
+				<item amount="9">diamond</item>
+			</drops>
+		</rule>
+	</blockdrops>
+</map>
