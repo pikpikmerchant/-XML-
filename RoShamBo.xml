@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<map proto="1.3.1">
+	<name>RoShamBo</name>
+	<version>1.0.0</version>
+	<objective>Be the team with the most kills after five minutes!</objective>
+	<authors>
+		<author>pikpikmerchant</author>
+		<author>personherson</author>
+	</authors>
+	<include src="tutorial.xml"/>
+	<tutorial>
+		<stage title="`aTeam Death Match `6(TDM)">
+			<message>
+				<line>`rThis map is a `a`lTeam Death Match `r(TDM) map with `bscoreboxes`r.</line>
+				<line>The objective is to get the most `bpoints `rin `65 `rminutes.</line>
+			</message>
+		</stage>
+		<stage title="`3`lClasses">
+			<message>
+				<line>`rThis map uses `bclass gamplay `rto recreate `cRock Paper Scissors `rin Minecraft.</line>
+				<line>`rEach of the classes before you is weak to one other, and strong against another, like in classic Rock Paper Scissors.</line>
+				<line>`2`lYou may view what each class has by opening these chests.</line>
+			</message>
+			<teleport>
+				<point yaw="0" pitch="5">0.5,34,19.5</point>
+			</teleport>
+		</stage>
+		<stage title="`4`lSpawns/Choosing Your Class">
+			<message>
+				<line>`rWhen the game starts, you will `4spawn `rhere.</line>
+				<line>`rYou can choose your `3class `rby jumping into one of the holes before you.</line>
+			</message>
+			<teleport>
+				<point yaw="-90" pitch="0">-25.5,15,0.5</point>
+			</teleport>
+		</stage>
+		<stage title="`2`lThe Battlefield (Or lack thereof)">
+			<message>
+				<line>`rThis area between the two team's bases is where most of the action will take place.</line>
+				<line>`rBe careful when entering this area! It makes you an easy target!.</line>
+			</message>
+			<teleport>
+				<point yaw="180" pitch="75">0.5,16,6.5</point>
+			</teleport>
+		</stage>
+		<stage title="`9`lScore Boxes">
+			<message>
+				<line>In each base, there is a `9Scorebox`r.</line>
+				<line>`rPlayers can score 5 extra points by entering the `9Scorebox `ron the other team's side.</line>
+			</message>
+			<teleport>
+				<point yaw="-135" pitch="15">23.5,9,3.5</point>
+			</teleport>
+		</stage>
+	</tutorial>
+	<friendlyfirerefund>off</friendlyfirerefund>
+	<teams>
+		<team color="dark red" max="10">Red Team</team>
+		<team color="dark green" max="10">Green Team</team>
+	</teams>
+	<kits>
+		<kit name="arrow">
+			<item slot="27" amount="1">arrow</item>
+		</kit>
+		<kit name="rock" parents="arrow">
+			<item slot="0" enchantment="knockback:10" name="`3`lRock" lore="`5`0Rock Crushes Scissors!" amount="1">coal</item>
+			<!-- Protection 100 to counter Sharpness; Knockback Resistance to prevent Rocks killing other Rocks. -->
+			<helmet enchantment="damage resistance:100" name="`3`lStone Helmet" damage="-3000">iron helmet</helmet>
+			<chestplate enchantment="damage resistance:100" attributes="generic.knockbackResistance" name="`3`lStone Chestplate" lore="`5`oGives Knockback Resistance" damage="-3000">iron chestplate</chestplate>
+			<leggings enchantment="damage resistance:100" name="`3`lStone Leggings" damage="-3000">iron leggings</leggings>
+			<boots enchantment="damage resistance:100" name="`3`lStone Boots" damage="-3000">iron boots</boots>
+		</kit>
+		<kit name="paper" parents="arrow">
+			<!-- Poison/Wither splash potions; potency 100; duration 20 seconds -->
+			<item slot="0" damage="16452" potions="poison:400:100:false;wither:400:100:false">potion</item>
+			<item slot="1" damage="16452" potions="poison:400:100:false;wither:400:100:false">potion</item>
+			<item slot="2" damage="16452" potions="poison:400:100:false;wither:400:100:false">potion</item>
+			<item slot="3" damage="16452" potions="poison:400:100:false;wither:400:100:false">potion</item>
+			<item slot="4" damage="16452" potions="poison:400:100:false;wither:400:100:false">potion</item>
+			<item slot="5" damage="16452" potions="poison:400:100:false;wither:400:100:false">potion</item>
+			<item slot="6" damage="16452" potions="poison:400:100:false;wither:400:100:false">potion</item>
+			<item slot="28" damage="16452" potions="poison:400:100:false;wither:400:100:false">potion</item>
+			<item slot="29" damage="16452" potions="poison:400:100:false;wither:400:100:false">potion</item>
+			<item slot="30" damage="16452" potions="poison:400:100:false;wither:400:100:false">potion</item>
+			<item slot="31" damage="16452" potions="poison:400:100:false;wither:400:100:false">potion</item>
+			<!-- The Paper part of the Paper Kit -->
+			<item slot="8" enchantment="damage all:1" name="`2`lPaper" lore="`5`oPaper Covers Rock!">Paper</item>
+			<!-- Knockback Resistance to prevent Rocks killing Paper; Regeneration 100 to prevent Papers from killing other Papers. -->
+			<item slot="0" enchantment="knockback:10" name="`3`lRock" lore="`5`0Rock Crushes Scissors!" amount="1">coal</item>
+			<helmet name="`2`lPaper Mache Helmet" damage="-3000">chainmail helmet</helmet>
+			<chestplate name="`2`lPaper Mache Chestplate" attributes="generic.knockbackResistance" lore="`5`oGives Knockback Resistance" damage="-3000">chainmail chestplate</chestplate>
+			<leggings name="`2`lPaper Mache Leggings" damage="-3000">chainmail leggings</leggings>
+			<boots name="`2`lPaper Mache Boots" damage="-3000">chainmail boots</boots>
+			<potion duration="oo" amplifier="100">regeneration</potion>
+		</kit>
+		<!-- Regeneration 100 to protect against Paper's Poison; Protection 100 to prevent Scissors killing other Scissors. -->
+		<kit name="scissors" parents="arrow">
+			<item enchantment="damage all:10" name="`d`lScissors" lore="`5`oScissors Cuts Paper!" damage="-3000" amount="1">shears</item>
+			<helmet enchantment="damage resistance:100" name="`3`lSharp Helmet" damage="-3000">gold helmet</helmet>
+			<chestplate enchantment="damage resistance:100" name="`3`lSharp Chestplate" lore="`5`oGives Knockback Resistance" damage="-3000">gold chestplate</chestplate>
+			<leggings enchantment="damage resistance:100" name="`3`lSharp Leggings" damage="-3000">gold leggings</leggings>
+			<boots enchantment="damage resistance:100" name="`3`Noot Boots" damage="-3000">gold boots</boots>
+			<potion duration="oo" amplifier="100">regeneration</potion>
+		</kit>
+	</kits>
+	<spawns>
+		<spawn team="red" yaw="-90">
+			<cuboid min="-26,15,-3" max="-25,15,4"/>
+		</spawn>
+		<spawn team="green" yaw="90">
+			<cuboid min="27,15,4" max="26,15,-3"/>
+		</spawn>
+		<default yaw="180">
+			<cylinder base="0.5,34,17.5" radius="1" height="0"/>
+		</default>
+	</spawns>
+	<itemremove>
+		<!-- Kit Items -->
+		<item>arrow</item>
+		<item>coal</item>
+		<item>iron helmet</item>
+		<item>iron chestplate</item>
+		<item>iron leggings</item>
+		<item>iron boots</item>
+		<item damage="16452">potion</item>
+		<item>paper</item>
+		<item>chainmail helmet</item>
+		<item>chainmail chestplate</item>
+		<item>chainmail leggings</item>
+		<item>chainmail boots</item>
+		<item>shears</item>
+		<item>gold helmet</item>
+		<item>gold chestplate</item>
+		<item>gold leggings</item>
+		<item>gold boots</item>
+		<item>bone</item>
+		<item damage="3">skull item</item>
+		<item>sign</item>
+	</itemremove>
+	<!-- Center spawner spawns skeletons -->
+	<mobs>
+	    <filter>
+	        <spawn>spawner</spawn>
+	    </filter>
+	</mobs>
+	<filters>
+		<filter name="only-red">
+			<team>red</team>
+		</filter>
+		<filter name="only-green">
+			<team>green</team>
+		</filter>
+	</filters>
+	<regions>
+		<rectangle name="map" min="-oo,-oo" max="oo,oo"/>
+		<union name="score-boxes">
+			<!-- Scorebox Red Team has to enter on Green's Side -->
+			<cuboid name="red-score-box" min="-24,8,2" max="-26,9,-1"/>
+			<!-- Scorebox Green Team has to enter on Red's Side -->
+			<cuboid name="green-score-box" min="25,8,-1" max="27,9,2"/>
+		</union>
+		<!-- Holes in front of spawn tha give classes -->
+		<union name="classes">
+			<union name="rock">
+				<cuboid name="red-rock" min="-20,14,5" max="-22,14,-2"/>
+				<cuboid name="green-rock" min="21,14,6" max="23,14.3"/>
+			</union>
+			<union name="paper">
+				<cuboid name="red-paper" min="-20,14,-1" max="-22,14,2"/>
+				<cuboid name="green-paper" min="21,14,2" max="23,14,-1"/>
+			</union>
+			<union name="scissors">
+				<cuboid name="red-scissors" min="-20,14,3" max="-22,14,6"/>
+				<cuboid name="green-scissors" min="21,14,-2" max="23,14,-5"/>
+			</union>
+		</union>
+		<!-- Applied -->
+		<apply block="deny-all;deny-world">
+			<region name="map"/>
+		</apply>
+		<apply kit="rock">
+			<region name="rock"/>
+		</apply>
+		<apply kit="paper">
+			<region name="paper"/>
+		</apply>
+		<apply kit="scissors">
+			<region name="scissors"/>
+		</apply>
+		<apply filter="only-red" message="`7You may not enter your own scorebox!">
+			<region name="red-score-box"/>
+		</apply>
+		<apply filter="only-red" message="`7You may not enter your own scorebox!">
+			<region name="red-score-box"/>
+		</apply>
+		<!-- Portals (Scorebox); Scorebox on Green's Side, Red has to enter-->
+		<cuboid name="red-score-box"/>
+		<!-- Scorebox on Red's Side, Green has to enter -->
+		<cuboid name="green-score-box"/>
+	</regions>
+	<score>
+		<time>300</time>
+		<limit>100</limit>
+		<!-- Scorebox regions defined around line 160 -->
+		<box value="5" team="red" filter="only-red" cooldown="1">
+			<region name="red-score-box"/>
+		</box>
+		<box value="5" team="green" filter="only-green" cooldown="1">
+			<region name="green-score-box"/>
+		</box>
+	</score>
+	<portals>
+		<portal x="@-19.5" y="@9" z="@0.5">
+			<region name="red-score-box"/>
+		</portal>
+		<portal x="@20.5" y="@9" z="@0.5">
+			<region name="green-score-box"/>
+		</portal>
+	</portals>
+</map>
