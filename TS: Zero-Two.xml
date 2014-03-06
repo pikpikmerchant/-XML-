@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+	<name>TS: Zero-Two</name>
+	<version>1.0.0</version>
+	<objective>Spleef everyone else out of the arena!</objective>
+	<authors>
+		<author>pikpikmerchant</author>
+	</authors>
+	<contributors>
+		<contributor contribution="Aesthetics">personherson</contributor>
+	</contributors>
+	<rules>
+		<rule>Do not make it so that players cannot spleef you! This includes, but is not limited to, creating a gap around the blocks that you are standing on so no one can reach you</rule>
+	</rules>
+	<blitz>
+		<time>1m</time>
+		<lives>1</lives>
+		<title>Spleef</title>
+	</blitz>
+	<include src="tutorial.xml"/>
+	<tutorial>
+		<stage title="`3`lSpleef">
+			<message>
+				<line>`rThis map is a `6Free For All `3Spleef `rgamemode map. Each players spawns with a `cEfficiency 20 Diamond Pickaxe`r.</line>
+				<line>Your objective is to spleef everyone else and be the last man standing! `a`lGood Luck!</line>
+			</message>
+		</stage>
+	</tutorial>
+	<teams>
+		<team color="dark aqua" max="50">Spleefers</team>
+	</teams>
+	<timelock>on</timelock>
+	<!-- Prevents Direct PvP (Prevents players from punching eachother) -->
+	<disabledamage>
+		<damage>entity attack</damage>
+	</disabledamage>
+	<hunger>
+		<depletion>off</depletion>
+	</hunger>
+	<kits>
+		<kit name="spleefers">
+			<item slot="0" enchantment="fast digging:20" damage="-3000">diamond pickaxe</item>
+			<helmet color="46C7C7" damage="-3000">leather helmet</helmet>
+			<chestplate color="46C7C7" damage="-3000">leather chestplate</chestplate>
+			<leggings color="46C7C7" damage="-3000">leather leggings</leggings>
+			<boots color="46C7C7" damage="-3000">leather boots</boots>
+		</kit>
+	</kits>
+	<toolrepair>
+		<tool>diamond pickaxe</tool>
+	</toolrepair>
+	<itemremove>
+		<!-- Kit Items -->
+		<item>leather helmet</item>
+		<item>leather chestplate</item>
+		<item>leather leggings</item>
+		<item>leather boots</item>
+		<!-- World Blocks -->
+		<item>obsidian</item>
+		<item>step</item>
+		<item damage="3">smooth brick</item>
+		<item damage="5">stained clay</item>
+		<item>smooth stairs</item>
+	</itemremove>
+	<regions>
+		<!-- Area where blocks may be broken -->
+		<cuboid name="spleef-area" min="-15,0,16" max="16,1,-15"/>
+		<!-- Applied -->
+		<apply block="deny-all" message="`7You may only destroy the floor!">
+			<negative>
+				<region name="spleef-area"/>
+			</negative>
+		</apply>
+	</regions>
+	<spawns>
+		<spawn team="spleefers" yaw="180">
+			<cylinder base="0.5,1,0.5" radius="10" height="0"/>
+		</spawn>
+		<default yaw="0">
+			<cylinder base="0.5,10,0.5" radius="1" height="0"/>
+		</default>
+	</spawns>
+</map>
