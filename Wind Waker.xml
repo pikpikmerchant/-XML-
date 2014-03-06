@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<map proto="1.3.1">
+	<name>Wind Waker</name>
+	<version>1.0.1</version>
+	<objective>Blitz | Eliminate the other team within 10 minutes.</objective>
+	<include src="tutorial.xml"/>
+	<tutorial>
+		<stage title="`aBlitz">
+			<message>
+				<line>This is a `4`lBlitz `rgamemode map.</line>
+				<line>`You have 1 life. `rUpon death, you will automatically become an observer. `a`lGood Luck!</line>
+			</message>
+		</stage>
+	</tutorial>
+	<authors>
+		<author>personheron</author>
+	</authors>
+	<contributors>
+		<contributor contribution="XML">Tywnis</contributor>
+		<contributor contribution="XML Fixes">pikpikmerchant</contributor>
+	</contributors>
+	<timelock>on</timelock>
+	<teams>
+		<team color="dark red" max="8">Red Team</team>
+		<team color="blue" max="8">Blue Team</team>
+	</teams>
+	<blitz>
+		<time>10m</time>
+		<lives>1</lives>
+	</blitz>
+	<kits>
+		<kit name="spawn">
+			<item slot="0">stone sword</item>
+			<item slot="1">bow</item>
+			<item slot="3" amount="6">cooked beef</item>
+			<item slot="4" amount="16">arrow</item>
+			<item slot="8" amount="1">golden apple</item>
+		</kit>
+		<kit name="red" parents="spawn">
+			<helmet color="cd0000" damage="-3000">leather helmet</helmet>
+			<chestplate color="cd0000" damage="-3000">leather chestplate</chestplate>
+			<leggings color="4c4c4c" damage="-3000">leather leggings</leggings>
+			<boots color="cd0000" damage="-3000">leather boots</boots>
+		</kit>
+		<kit name="blue" parents="spawn">
+			<helmet color="0066cc" damage="-3000">leather helmet</helmet>
+			<chestplate color="0066cc" damage="-3000">leather chestplate</chestplate>
+			<leggings color="4c4c4c" damage="-3000">leather leggings</leggings>
+			<boots color="0066cc" damage="-3000">leather boots</boots>
+		</kit>
+	</kits>
+	<itemremove>
+		<item>cooked beef</item>
+		<item>arrow</item>
+		<item>golden apple</item>
+		<item>leather helmet</item>
+		<item>leather chestplate</item>
+		<item>leather leggings</item>
+		<item>leather boots</item>
+	</itemremove>
+	<toolrepair>
+		<tool>stone sword</tool>
+		<tool>bow</tool>
+	</toolrepair>
+	<regions>
+		<apply block="deny-all">
+			<rectangle name="map" min="-oo,-oo" max="oo,oo"/>
+		</apply>
+	</regions>
+	<playable>
+	<region name="main-area"/>
+	</playable>
+	<spawns>
+		<spawn team="red" kit="red" yaw="-135">
+			<cuboid min="14,16,31" max="16,16,29"/>
+		</spawn>
+		<spawn team="blue" kit="blue" yaw="45">
+			<cuboid min="-13,16,-20" max="-15,16,-28"/>
+		</spawn>
+		<default yaw="180">
+			<block>0.5,6,0.5</block>
+		</default>
+	</spawns>
+	<include src="../blitz-global.xml"/>
+</map>
