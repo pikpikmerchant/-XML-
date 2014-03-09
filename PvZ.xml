@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+    <name>PvZ</name>
+    <version>0.1</version>
+    <objective>Zombies: Eat the homeowner's brain! Plants: Defend the homeowners brain for 15 minutes!</objective>
+    <authors>
+        <author>pikpikmerchant</author>
+        <author>nixter1029</author>
+    </authors>
+    <include src="tutorial.xml"/>
+    <tutorial>
+        <stage title="Objective">
+            <message>
+                <line>The objective of the map is for the `2Zombies`r to destroy `bBob's Brain `e(The Sponge) `r. The objective of the `aPlants `ris to defend `bBob's Brain`r.</line>
+            </message>
+            <teleport>
+                <point yaw="57" pitch="30">-54.5,18,-7.5</point>
+            </teleport>
+        </stage>
+        <stage title="Sun">
+            <message>
+                <line>You use `eSun`r to trade with `6Crazy Dave`r.</line>
+                <line>`eSun`r drops from the sunflowers every 12 seconds.</line>
+                <line>`eSun`r also randomly drop from the sky every 12 seconds.</line>
+            </message>
+            <teleport>
+                <point yaw="118" pitch="30">-31.5,16,11.5</point>
+            </teleport>
+        </stage>
+        <stage title="Rotten Flesh">
+            <message>
+                <line>`2Zombies`r can get rotten flesh from trading the `eSun`r they get from killing the `aPlants`r to `2Dr. Zomboss`r.</line>
+            </message>
+            <teleport>
+                <point yaw="-122" pitch="45">-59.5,12.5,-9.5</point>
+            </teleport>
+        </stage>
+        <stage title="Building Area">
+            <message>
+                <line>You can only build in between the `4red lines`r.</line>
+            </message>
+            <teleport>
+                <point yaw="165" pitch="45">-28.5,21,18.5</point>
+            </teleport>
+        </stage>
+        <stage title="Plant Barrier">
+            <message>
+                <line>`aPlants`r may not pass this `4red line`r.</line>
+            </message>
+            <teleport>
+                <point yaw="-90" pitch="90">-23.5,25,1.5</point>
+            </teleport>
+        </stage>
+    </tutorial>
+    <destroyables name="Brain" materials="sponge">
+        <destroyable owner="plants">
+            <block>-57.5,17,-5.5</block>
+        </destroyable>
+    </destroyables>
+    <time result="plants">15m</time>
+    <timelock>on</timelock>
+    <teams>
+        <team color="green" max="20" max-overfill="25">Plants</team>
+        <team color="dark green" max="12" max-overfill="15">Zombies</team>
+    </teams>
+    <kits>
+        <kit name="spawn">
+            <potion duration="5" amplifier="1" ambient="true">heal</potion>
+        </kit>
+        <kit name="zombie" parents="spawn">
+            <item slot="0" damage="-3000">wood sword</item>
+            <potion duration="oo" amplifier="5">slow</potion>
+        </kit>
+    </kits>
+    <spawns>
+        <spawn team="zombies" yaw="90" kit="zombie">
+            <block>61.5,11,0.5</block>
+        </spawn>
+        <spawn team="plants" yaw="-90" kit="spawn">
+            <block>-42.5,15,11.5</block>
+        </spawn>
+        <default yaw="0">
+            <block>0.5,11,-27.5</block>
+        </default>
+    </spawns>
+    <multitrade/>
+    <proximity-alarms>
+        <proximity-alarm message="`2Zombies`r are near `dBob's Brain!">
+            <region>
+                <cylinder base="-57.5,18,-5.5" radius="30" height="5"/>
+            </region>
+            <detect>
+                <team>zombies</team>
+            </detect>
+        </proximity-alarm>
+    </proximity-alarms>
+    <tnt>
+        <instantignite>on</instantignite>
+        <blockdamage>off</blockdamage>
+    </tnt>
+    <filters>
+        <!-- Causes blocks recieved by plant trades to be placed in between the two red lines -->
+        <filter name="plant-blocks" parents="deny-blocks">
+            <allow>
+                <block>wood</block>
+                <block>TNT</block>
+            </allow>
+        </filter>
+        <!-- Causes only monument to be breakable -->
+        <filter name="only-sponge" parents="deny-all">
+            <allow>
+                <block>sponge</block>
+            </allow>
+        </filter>
+        <!-- Team Filters -->
+        <filter name="only-zombies">
+            <team>zombies</team>
+        </filter>
+        <filter name="no-void" parents="allow-all">
+            <deny>
+                <void/>
+            </deny>
+        </filter>
+    </filters>
+    <regions>
+        <rectangle name="map" min="-oo,-oo" max="oo,oo"/>
+        <rectangle name="plant-area" min="-22,16" max="-36,-14"/>
+        <!-- Applied -->
+        <apply block="only-sponge">
+            <negative>
+                <region name="plant-area"/>
+            </negative>
+        </apply>
+        <apply block="plant-blocks">
+            <region name="plant-area"/>
+        </apply>
+        <apply enter="only-zombies" message="`7Plants may not pass this line!">
+            <rectangle min="-22,-14" max="-23,16"/>
+        </apply>
+        <apply block="no-void" message="`7You may not edit the void area!">
+            <region name="map"/>
+        </apply>    
+    </regions>
+    <killreward>
+        <item name="`e`lSun" lore="`a`oUse this to buy Upgrades!" amount="8">glowstone</item>
+    </killreward>
+    <itemremove>
+        <item>sponge</item>
+        <item>wood sword</item>
+        <item>tnt</item>
+        <item>bow</item>
+        <item>wood</item>
+        <item>arrow</item>
+        <item>potion</item>
+        <item>glass bottle</item>
+        <item>rotten flesh</item>
+        <item>gold helmet</item>
+        <item>iron helmet</item>
+        <item>leather chestplate</item>
+        <item>chainmail leggings</item>
+        <item>gold boots</item>
+        <item>shears</item>
+    </itemremove>
+    <itemkeep>
+        <!-- People keep upgrades -->
+        <item>tnt</item>
+        <item>bow</item>
+        <item>wood</item>
+        <item>arrow</item>
+        <item>potion</item>
+        <item>rotten flesh</item>
+        <item>gold helmet</item>
+        <item>iron helmet</item>
+        <item>leather chestplate</item>
+        <item>chainmail leggings</item>
+        <item>gold boots</item>
+        <item>shears</item>
+    </itemkeep>
+</map>
