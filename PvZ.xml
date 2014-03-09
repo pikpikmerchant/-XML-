@@ -84,16 +84,6 @@
         </default>
     </spawns>
     <multitrade/>
-    <proximity-alarms>
-        <proximity-alarm message="`2Zombies`r are near `dBob's Brain!">
-            <region>
-                <cylinder base="-57.5,18,-5.5" radius="30" height="5"/>
-            </region>
-            <detect>
-                <team>zombies</team>
-            </detect>
-        </proximity-alarm>
-    </proximity-alarms>
     <tnt>
         <instantignite>on</instantignite>
         <blockdamage>off</blockdamage>
@@ -168,7 +158,6 @@
         <item>wood</item>
         <item>arrow</item>
         <item>potion</item>
-        <item>rotten flesh</item>
         <item>gold helmet</item>
         <item>iron helmet</item>
         <item>leather chestplate</item>
