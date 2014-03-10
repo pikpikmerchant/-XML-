@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+	<name>The Tip</name>
+	<version>1.0.0</version>
+	<objective>Get to the top and place the wool in your team's wool monument!</objective>
+	<include src="tutorial.xml"/>
+	<tutorial>
+		<stage title="`aCapture The Wool (CTW)">
+			<message>
+				<line>`rThis is a `aCapture The Wool `rmap.</line>
+				<line>`rYour objective is to `bascend the mountain `rand place your team's color `awool `rin your designated `awool monument`r!</line>
+			</message>
+			<teleport>
+				<point yaw="45" pitch="45">5.5,256,-4.5</point>
+			</teleport>
+		</stage>
+		<stage title="`bThe Mountain">
+			<message>
+				<line>`rThis is the `bmountain `r you must ascend.</line>
+				<line>`rThere are supplies such as `cTNT `r and `3Diamonds `rhidden about the mountain.</line>
+			</message>
+			<teleport>
+				<point yaw="-135" pitch="12">-20.5,132,25.5</point>
+			</teleport>
+		</stage>
+		<stage title="`3The Start">
+			<message>
+				<line>`rThis is where players the start their ascent.</line>
+				<line>`rPlayers spawn ready with `3gear `rto climb up the `bmountain`r!</line>
+			</message>
+			<teleport>
+				<point yaw="-150" pitch="-80">-7.5,22,12.5</point>
+			</teleport>
+		</stage>
+	</tutorial>
+	<authors>
+		<author>pikpikmerchant</author>
+	</authors>
+	<contributors>
+		<contributor contribution="Inventing Sliced Bread in 1928">Otto Frderick Rohwedder</contributor>
+	</contributors>
+	<teams>
+		<team color="dark red" max="">Moderators</team>
+		<team color="gold" max="">Admins</team>
+		<team color="yellow" max="">CIPato</team>
+		<team color="green" max="">Team Spleef</team>
+		<team color="dark green" max="">Badlion</team>
+		<team color="blue" max="">Noot Noots</team>
+		<team color="dark purple" max="">Girls Generation</team>
+		<team color="light purple" max="">Hella Cute</team>
+	</teams>
+	<wools>
+		<wool team="Moderators" color="red">
+			<block>3.5,251,-0.5</block>
+		</wool>
+		<wool team="Admins" color="orange">
+			<block>3.5,251,1.5</block>
+		</wool>
+		<wool team="CIPato" color="yellow">
+			<block>1.5,251,3.5</block>
+		</wool>
+		<wool team="Team Spleef" color="lime">
+			<block>-0.5,251,3.5</block>
+		</wool>
+		<wool team="Badlion" color="green">
+			<block>-2.5,251,1.5</block>
+		</wool>
+		<wool team="Noot Noots" color="blue">
+			<block>-2.5,251,-0.5</block>
+		</wool>
+		<wool team="Girls Generation" color="purple">
+			<block>-0.5,251,-2.5</block>
+		</wool>
+		<wool team="Hella Cute" color="pink">
+			<block>1.5,251,-2.5</block>
+		</wool>
+	</wools>
+	<kits>
+		<kit name="spawn">
+			<item slot="0" enchantment="dig speed:2;durability:3" name="`bIce Pick">iron pickaxe</item>
+			<item slot="1">bow</item>
+			<item slot="28" amount="48">arrow</item>
+			<item slot="2" enchantment="durability:3" name="`bHatchet">iron axe</item>
+			<item slot="3" amount="20" damage="1">wood</item>
+			<item slot="4" amount="8">ladder</item>
+			<item slot="5" amount="1">bucket</item>
+			<item slot="7" amount="2">golden apple</item>
+			<item slot="8" amount="32">steak</item>
+			<potion duration="5" amplifier="4" ambient="true">damage resistance</potion>
+			<potion duration="5" amplifier="4" ambient="true">heal</potion>
+		</kit>
+		<kit name="Moderators" parents="spawn">
+			<block slot="6" damage="14">wool</block>
+		</kit>
+		<kit name="Admins" parents="spawn">
+			<block slot="6" damage="1">wool</block>
+		</kit>
+		<kit name="CIPato" parents="spawn">
+			<block slot="6" damage="4">wool</block>
+		</kit>
+		<kit name="Team Spleef" parents="spawn">
+			<block slot="6" damage="5">wool</block>
+		</kit>
+		<kit name="Badlion" parents="spawn">
+			<block slot="6" damage="13">wool</block>
+		</kit>
+		<kit name="Noot Noots" parents="spawn">
+			<block slot="6" damage="11">wool</block>
+		</kit>
+		<kit name="Girls Generation" parents="spawn">
+			<block slot="6" damage="10">wool</block>
+		</kit>
+		<kit name="Hella Cute" parents="spawn">
+			<block slot="6" damage="6">wool</block>
+		</kit>
+	</kits>
+	<toolrepair>
+		<tool>stone axe</tool>
+		<tool>bow</tool>
+	</toolrepair>
+	<itemremove>
+		<item>arrow</item>
+		<item>steak</item>
+		<item damage="14">wool</item>
+		<item damage="1">wool</item>
+		<item damage="4">wool</item>
+		<item damage="5">wool</item>
+		<item damage="13">wool</item>
+		<item damage="11">wool</item>
+		<item damage="10">wool</item>
+		<item damage="6">wool</item>
+	</itemremove>
+	<spawns>
+		<spawn team="Moderators" kit="Moderators" yaw="180">
+			<block>-1.5,24,10.5</block>
+		</spawn>
+		<spawn team="Admins" kit="Admins" yaw="180">
+			<block>-1.5,24,10.5</block>
+		</spawn>
+		<spawn team="CIPato" kit="CIPato" yaw="180">
+			<block>-1.5,24,10.5</block>
+		</spawn>
+		<spawn team="Team Spleef" kit="Team Spleef" yaw="180">
+			<block>-1.5,24,10.5</block>
+		</spawn>
+		<spawn team="Badlion" kit="Badlion" yaw="180">
+			<block>-1.5,24,10.5</block>
+		</spawn>
+		<spawn team="Noot Noots" kit="Noot Noots" yaw="180">
+			<block>-1.5,24,10.5</block>
+		</spawn>
+		<spawn team="Girls Generation" kit="Girls Generation" yaw="180">
+			<block>-1.5,24,10.5</block>
+		</spawn>
+		<spawn team="Hella Cute" kit="Hella Cute" yaw="180">
+			<block>-1.5,24,10.5</block>
+		</spawn>
+		<default yaw="0">
+			<block>0.5,250,0.5,</block>
+		</default>
+	</spawns>		
+	<filters>
+		<filter name="only-wool">
+			<block damage="14">wool</block>
+			<block damage="1">wool</block>
+			<block damage="4">wool</block>
+			<block damage="5">wool</block>
+			<block damage="13">wool</block>
+			<block damage="11">wool</block>
+			<block damage="10">wool</block>
+			<block damage="6">wool</block>
+		</filter>
+	</filters>
+	<regions>
+		<cylinder name="wool-monuments" base="0.5,250,0.5" radius="7" height="3"/>
+		<!-- Applied -->
+		<apply block="only-wool" message="`7You may only place your team's wool in your team's wool monument!">
+			<region name="wool-monuments"/>
+		</apply>
+	</regions>
+	<blockdrops>
+		<rule>
+			<region>
+				<region name="wool-monuments"/>
+			</region>
+			<filter>
+				<block>stone</block>
+			</filter>
+			<drops>
+				<item>stone</item>
+			</drops>
+		</rule>
+	</blockdrops>
+</map>
