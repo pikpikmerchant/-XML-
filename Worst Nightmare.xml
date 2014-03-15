@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<map proto="1.3.1">
+	<include src="tutorial.xml"/>
+	<name>Worst Nightmare</name>
+	<version>1.0.1</version>
+	<objective>Destroy the enemy team's obsidian monument!</objective>
+	<authors>
+		<author>OllieGamerZ</author>
+	</authors>
+	<rules>
+		<rule>Do not shoot into the other team's spawn area!</rule>
+	</rules>
+	<contributors>
+		<contributor contribution="XML">pikpikmerchant</contributor>
+		<contributor contribution="Build Help">dcstarwars</contributor>
+	</contributors>
+	<timelock>on</timelock>
+	<teams>
+		<team color="gold" max="16">Orange Team</team>
+		<team color="dark purple" max="16">Purple Team</team>
+	</teams>
+	<destroyables name="Monument" materials="obsidian" completion="100%">
+		<destroyable owner="orange">
+			<cuboid min="-467,25,195" max="-464,28,196"/>
+		</destroyable>
+		<destroyable owner="purple">
+			<cuboid min="-464,25,24" max="-466,28,23"/>
+		</destroyable>
+	</destroyables>
+	<kits>
+		<kit name="spawn">
+			<item slot="0">stone sword</item>
+			<item slot="1">bow</item>
+			<!-- [Experimental] Infinite Arrows w/o Inifinty Enchantment (Electroid told me this would work if it doesn't yell at him and not me) -->
+			<item slot="28" amount="-1">arrow</item>
+			<item slot="2">diamond pickaxe</item> 
+			<item slot="3">stone spade</item>
+			<item slot="4" amount="64" damage="3">wood</item>
+			<!-- 2 Cobwebs -->
+			<item slot="5" amount="2">30</item>
+			<item slot="6" amount="32">ladder</item>
+			<item slot="7" amount="2">golden apple</item>
+			<!-- Cooked Fish -->
+			<item slot="8" amount="64">350</item>
+			<potion duration="7" amplifier="4" ambient="true">damage resistance</potion>
+			<potion duration="7" amplifier="4" ambient="true">heal</potion>
+		</kit>
+		<kit name="orange" parents="spawn">
+			<helmet damage="-3000">gold helmet</helmet>
+			<chestplate color="F87217" enchantment="protection projectile:1" damage="-3000">leather chestplate</chestplate>
+			<leggings color="F87217" damage="-3000">leather leggings</leggings>
+			<boots color="F87217" enchantment="protection fall:1" damage="-3000">leather boots</boots>
+		</kit>
+		<kit name="purple" parents="spawn">
+			<helmet damage="-3000">gold helmet</helmet>
+			<chestplate color="6A07FF" enchantment="protection projectile:1" damage="-3000">leather chestplate</chestplate>
+			<leggings color="6A07FF" damage="-3000">leather leggings</leggings>
+			<boots color="6A07FF" enchantment="protection fall:1" damage="-3000">leather boots</boots>
+		</kit>
+	</kits>
+	<spawns>
+		<spawn team="orange" kit="orange" yaw="180">
+			<cuboid min="-467,13,182" max="-463,13,180"/>
+		</spawn>
+		<spawn team="purple" kit="purple" yaw="0">
+			<cuboid min="-463,13,37" max="-467,13,39"/>
+		</spawn>
+		<default yaw="-90">
+			<cylinder base="-528.5,9,109.5" radius="3" height="0"/>
+		</default>
+	</spawns>
+	<filters>
+		<filter name="only-orange">
+			<team>orange</team>
+		</filter>
+		<filter name="only-purple">
+			<team>purple</team>
+		</filter>
+		<filter name="no-void" parents="allow-all">
+			<deny>
+				<void/>
+			</deny>
+		</filter>
+	</filters>
+	<regions>
+		<rectangle name="map" min="-oo,-oo" max="oo,oo"/>
+		<union name="spawns">
+			<union name="orange-spawn">
+				<cuboid min="-476,11,175" max="-454,25,186"/>
+				<cuboid min="-472,11,186" max="-458,25,190"/>
+			</union>
+			<union name="purple-spawn">
+				<cuboid min="-454,11,44" max="-476,22,33"/>
+				<cuboid min="-458,11,33" max="-471,26,29"/>
+			</union>
+		</union>
+		<rectangle name="playable-void" min="-430,1,140" max="-500,9,79"/>
+		<!-- Applied -->
+		<apply block="deny-all" message="You may not modify the spawn area!">
+			<region name="spawns"/>
+		</apply>
+		<apply enter="only-orange" message="You may not enter the enemy team's base!">
+			<region name="orange-spawn"/>
+		</apply>
+		<apply enter="only-purple" message="You may not enter the enemy team's base!">
+			<region name="purple-spawn"/>
+		</apply>
+		<apply block="no-void" message="`cYou may not build in the void area">
+			<negative>
+				<region name="playable-void"/>
+			</negative>
+		</apply>
+	</regions>
+	<maxbuildheight>32</maxbuildheight>
+	<itemremove>
+		<item>gold helmet</item>
+		<item>leather chestplate</item>
+		<item>leather leggings</item>
+		<item>leather boots</item>
+		<item>obsidian</item>
+		<item>arrow</item>
+		<item>glowstone dust</item>
+		<item>string</item>
+		<item>ladder</item>
+		<!-- I didn't have internet when doing this XML, so I couldn't access the list of bukkit names. This is why the following items appear as IDs. -->
+		<item>87</item>
+		<item>88</item>
+		<item>96</item>
+		<item>112</item>
+		<item>114</item>
+		<item>113</item>
+		<!-- Slabs -->
+		<item damage="6">44</item>
+		<item damage="5">126</item>
+		<item damage="1">126</item>
+		<!-- Stained Clay -->
+		<item damage="2">159</item>
+		<item damage="3">159</item>
+		<item damage="7">159</item>
+		<item damage="10">159</item>
+		<item damage="11">159</item>
+		<!-- Wools -->
+		<item>wool</item>
+		<item damage="1">wool</item>
+		<item damage="2">wool</item>
+		<item damage="8">wool</item>
+		<item damage="10">wool</item>
+		<item damage="14">wool</item>
+		<item damage="15">wool</item>
+	</itemremove>
+	<toolrepair>
+		<tool>stone sword</tool>
+		<tool>bow</tool>
+		<tool>diamond pickaxe</tool>
+		<tool>stone spade</tool>
+	</toolrepair>
+	<tutorial>
+		<stage title="`a`lDestroy the Monument">
+			<message>
+				<line>`7This map is a `r`aDestroy the Monument `r`7(DTM) map.</line>
+				<line>`7The objective is to destroy the enemy's obsidian monument.</line>
+			</message>
+			<teleport>
+				<point yaw="-50" pitch="45">-469.5,30,192.5</point>
+			</teleport>
+		</stage>
+		<stage title="Gold Nugget Spawners">
+			<message>
+				<line>`7On each side, there are `r`64 Golden Nugget Spawners. `r`7These spawn `r`64 gold nuggets `r`7every few seconds</line>
+				<line>`6Gold Nuggets `r`7can be used to craft `r`6Gold Armor and Tools</line>
+			</message>
+			<teleport>
+				<point yaw="-135" pitch="80">-478.5,5.5,136.5</point>
+			</teleport>
+		</stage>
+		<stage title="Spawn">
+			<message>
+				<line>`7This is where you `r`bspawn. `r`7You `r`9spawn with gear `r`7so you are ready to go into battle!</line>
+				<line>
+				`7Your spawn is `r`9`lindestructable `r`7and no one can break it.
+				</line>
+				<line>`7Please refrain from `r`c`lspawnkilling `r`7by shooting into the other team's spawn area. `r`c`lIf you do not do so, you may be punished.</line>
+			</message>
+			<teleport>
+				<point yaw="55" pitch="45">-458.5,23,177.5</point>
+			</teleport>
+		</stage>
+	</tutorial>
+</map>
